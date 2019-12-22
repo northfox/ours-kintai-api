@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:./src/test/h2db/test:testdb;MODE=MySQL
+    url: jdbc:h2:./src/test/h2db/test;MODE=MySQL
     username: sa
     password:
     initialization-mode: always
@@ -11,7 +11,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
 
 # actuator
