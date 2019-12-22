@@ -1,6 +1,6 @@
 create table if not exists kintai_user
 (
-    id         int                  not null auto_increment,
+    id         int                  primary key auto_increment,
     name       varchar(4000) unique not null,
     created_at timestamp            not null default now(),
     created_by varchar(100),
@@ -12,7 +12,7 @@ create table if not exists kintai_user
 
 create table if not exists kintai_time
 (
-    id         int                  not null auto_increment,
+    id         int                  primary key auto_increment,
     category   varchar(4000) not null,
     in_time    timestamp,
     out_time   timestamp,
