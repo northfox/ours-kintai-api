@@ -21,8 +21,8 @@ public class UserService {
     return result;
   }
 
-  public UserResource findById(String id) {
-    UserEntity user = userRepository.findById(Integer.valueOf(id))
+  public UserResource findById(Integer id) {
+    UserEntity user = userRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("存在しないユーザ"));
     UserResource result = userFactory.generateUser(user);
     return result;

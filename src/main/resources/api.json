@@ -23,9 +23,9 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "string"
+            "type": "integer"
           },
-          "description": "user id  "
+          "description": "user id"
         }
       ],
       "get": {
@@ -44,35 +44,6 @@
         },
         "operationId": "getUserById",
         "description": "get user",
-        "tags": [
-          "user"
-        ]
-      },
-      "post": {
-        "summary": "create user",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "postUser",
-        "description": "create user",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          }
-        },
         "tags": [
           "user"
         ]
@@ -120,7 +91,7 @@
         ]
       }
     },
-    "/users/{userId}/time": {
+    "/users/{userId}/times": {
       "parameters": [
         {
           "name": "userId",
@@ -143,14 +114,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Time"
+                  "$ref": "#/components/schemas/Times"
                 }
               }
             }
           }
         },
-        "operationId": "getTimeForUsersById",
-        "description": "get time for users by id"
+        "operationId": "getTimesForUsersById",
+        "description": "get times for users by id"
       },
       "post": {
         "summary": "create user time on category",
@@ -180,6 +151,48 @@
             }
           }
         }
+      }
+    },
+    "/users/{userId}/times/{timeId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          },
+          "description": "user id"
+        },
+        {
+          "name": "timeId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          },
+          "description": "time id"
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "time"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Time"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getTimeByTimeIdForUsersById",
+        "description": "get time by id for users by id"
       },
       "put": {
         "summary": "update user time on category",
@@ -198,8 +211,8 @@
             }
           }
         },
-        "operationId": "putTimeForUsersById",
-        "description": "put time for users by id",
+        "operationId": "putTimeByIdForUserById",
+        "description": "put time by id for users by id",
         "requestBody": {
           "content": {
             "application/json": {
@@ -231,6 +244,35 @@
         },
         "operationId": "getUsers",
         "description": "get users"
+      },
+      "post": {
+        "summary": "create user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postUser",
+        "description": "create user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
       }
     }
   },
@@ -251,13 +293,14 @@
         },
         "x-tags": [
           "user"
-        ]
+        ],
+        "description": "user"
       },
       "Time": {
         "title": "Time",
         "type": "object",
         "x-examples": {},
-        "description": "",
+        "description": "time",
         "properties": {
           "id": {
             "type": "integer",
@@ -293,7 +336,21 @@
               "$ref": "#/components/schemas/User"
             }
           }
-        }
+        },
+        "description": "users"
+      },
+      "Times": {
+        "title": "Times",
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Time"
+            }
+          }
+        },
+        "description": "times"
       }
     }
   },
