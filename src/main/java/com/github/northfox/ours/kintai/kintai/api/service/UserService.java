@@ -7,7 +7,6 @@ import com.github.northfox.ours.kintai.kintai.api.repository.UserRepository;
 import com.github.northfox.ours.kintai.kintai.api.service.factory.UserFactory;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

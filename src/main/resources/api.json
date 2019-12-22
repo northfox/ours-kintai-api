@@ -367,7 +367,7 @@
         "title": "Times",
         "type": "object",
         "properties": {
-          "time": {
+          "times": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Time"
