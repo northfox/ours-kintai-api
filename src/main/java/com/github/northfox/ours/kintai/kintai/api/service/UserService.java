@@ -1,6 +1,7 @@
 package com.github.northfox.ours.kintai.kintai.api.service;
 
 import com.github.northfox.ours.kintai.api.model.UserResource;
+import com.github.northfox.ours.kintai.api.model.UsersResource;
 import com.github.northfox.ours.kintai.kintai.api.domain.UserEntity;
 import com.github.northfox.ours.kintai.kintai.api.repository.UserRepository;
 import com.github.northfox.ours.kintai.kintai.api.service.factory.UserFactory;
@@ -14,9 +15,9 @@ public class UserService {
   private final UserFactory userFactory;
   private final UserRepository userRepository;
 
-  public List<UserResource> findAll() {
+  public UsersResource findAll() {
     List<UserEntity> users = userRepository.findAll();
-    List<UserResource> result = userFactory.generateUsers(users);
+    UsersResource result = userFactory.generateUsers(users);
     return result;
   }
 

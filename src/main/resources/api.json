@@ -210,6 +210,28 @@
           }
         }
       }
+    },
+    "/users": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getUsers",
+        "description": "get users"
+      }
     }
   },
   "components": {
@@ -260,6 +282,18 @@
         "x-tags": [
           "time"
         ]
+      },
+      "Users": {
+        "title": "Users",
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
       }
     }
   },
