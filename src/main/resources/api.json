@@ -1,0 +1,259 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "kintai-api",
+    "version": "v1",
+    "description": "勤怠管理システムのAPIです。\n主に下記リソースに対するCRUD操作を可能にします。\n・ユーザ情報\n・カテゴリマスタ\n・入出情報\n・プロジェクト情報\n・ユーザとプロジェクトのリンク",
+    "contact": {
+      "name": "northfox",
+      "email": "vulpes.engineer@gmail.com",
+      "url": "https://github.com/northfox"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/users/{userId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "user id  "
+        }
+      ],
+      "get": {
+        "summary": "get user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getUserById",
+        "description": "get user",
+        "tags": [
+          "user"
+        ]
+      },
+      "post": {
+        "summary": "create user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postUser",
+        "description": "create user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      },
+      "put": {
+        "summary": "update user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putUser",
+        "description": "update user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      },
+      "delete": {
+        "summary": "delete user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "deleteUser",
+        "description": "delete user",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{userId}/time": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          },
+          "description": "user id"
+        }
+      ],
+      "get": {
+        "summary": "get user time on category",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Time"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getTimeForUsersById",
+        "description": "get time for users by id"
+      },
+      "post": {
+        "summary": "create user time on category",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Time"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postTimeForUsersById",
+        "description": "post time for users by id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Time"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update user time on category",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Time"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putTimeForUsersById",
+        "description": "put time for users by id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Time"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Time": {
+        "title": "Time",
+        "type": "object",
+        "x-examples": {},
+        "description": "",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "in_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "out_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "category": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "user"
+    }
+  ]
+}
