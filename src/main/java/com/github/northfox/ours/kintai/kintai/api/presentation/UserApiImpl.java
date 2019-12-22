@@ -37,4 +37,16 @@ public class UserApiImpl implements UserApi {
     UserResource result = userService.create(userResource);
     return ResponseEntity.ok(result);
   }
+
+  @Override
+  public ResponseEntity<UserResource> putUser(Integer userId, @Valid UserResource userResource) {
+    UserResource result = userService.update(userId, userResource);
+    return ResponseEntity.ok(result);
+  }
+
+  @Override
+  public ResponseEntity<Void> deleteUser(Integer userId) {
+    userService.delete(userId);
+    return new ResponseEntity<Void>(HttpStatus.OK);
+  }
 }

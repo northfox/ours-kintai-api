@@ -289,6 +289,18 @@
           },
           "name": {
             "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "x-tags": [
@@ -301,6 +313,9 @@
         "type": "object",
         "x-examples": {},
         "description": "time",
+        "x-tags": [
+          "time"
+        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -320,11 +335,20 @@
           },
           "category": {
             "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": "string",
+            "format": "date-time"
           }
-        },
-        "x-tags": [
-          "time"
-        ]
+        }
       },
       "Users": {
         "title": "Users",

@@ -5,7 +5,9 @@ import com.github.northfox.ours.kintai.api.model.UsersResource;
 import com.github.northfox.ours.kintai.kintai.api.domain.UserEntity;
 import com.github.northfox.ours.kintai.kintai.api.repository.UserRepository;
 import com.github.northfox.ours.kintai.kintai.api.service.factory.UserFactory;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,25 @@ public class UserService {
     UserEntity user = userFactory.parseUser(userResource);
     userRepository.save(user);
     return userFactory.generateUser(user);
+  }
+
+  public UserResource update(Integer userId, UserResource userResource) {
+    UserEntity savedUser = userRepository.findById(userId)
+        .orElseThrow(() -> new RuntimeException("存在しないユーザ"));
+    savedUser.setName(userResource.getName());
+    savedUser.setUpdatedAt(LocalDateTime.now());
+    savedUser.setUpdatedBy("api"); // TODO want requester
+    UserEntity updatedUser = userRepository.save(savedUser);
+    return userFactory.generateUser(updatedUser);
+  }
+
+  public void delete(Integer userId) {
+    UserEntity savedUser = userRepository.findById(userId)
+        .orElseThrow(() -> new RuntimeException("存在しないユーザ"));
+    savedUser.setUpdatedAt(LocalDateTime.now());
+    savedUser.setUpdatedBy("api"); // TODO want requester
+    savedUser.setDeletedAt(LocalDateTime.now());
+    savedUser.setDeletedBy("api"); // TODO want requester
+    userRepository.save(savedUser);
   }
 }
