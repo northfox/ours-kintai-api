@@ -27,4 +27,10 @@ public class UserService {
     UserResource result = userFactory.generateUser(user);
     return result;
   }
+
+  public UserResource create(UserResource userResource) {
+    UserEntity user = userFactory.parseUser(userResource);
+    userRepository.save(user);
+    return userFactory.generateUser(user);
+  }
 }
