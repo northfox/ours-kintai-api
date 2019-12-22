@@ -3,6 +3,7 @@ package com.github.northfox.ours.kintai.kintai.api.service.factory;
 import com.github.northfox.ours.kintai.api.model.TimeResource;
 import com.github.northfox.ours.kintai.api.model.TimesResource;
 import com.github.northfox.ours.kintai.kintai.api.domain.TimeEntity;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -40,5 +41,25 @@ public class TimeFactory {
         .createdAt(time.getCreatedAt().atOffset(ZoneOffset.ofHours(9)))
         .updatedAt(time.getUpdatedAt().atOffset(ZoneOffset.ofHours(9)))
         .deletedAt(deletedAt.orElse(null));
+  }
+
+  public TimeEntity parse(TimeResource timeResource) {
+    Optional<LocalDateTime> inTime = Optional.ofNullable(timeResource.getInTime())
+        .map(t -> t.toLocalDateTime());
+    Optional<LocalDateTime> outTime = Optional.ofNullable(timeResource.getOutTime())
+        .map(t -> t.toLocalDateTime());
+
+    TimeEntity user = TimeEntity.builder()
+        .id(timeResource.getId())
+        .category(timeResource.getCategory())
+        .userId(timeResource.getUserId())
+        .inTime(inTime.orElse(null))
+        .outTime(outTime.orElse(null))
+        .createdAt(LocalDateTime.now())
+        .createdBy("api") // TODO want requester
+        .updatedAt(LocalDateTime.now())
+        .updatedBy("api") // TODO want requester
+        .build();
+    return user;
   }
 }
