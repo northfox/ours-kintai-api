@@ -134,7 +134,9 @@
       ],
       "get": {
         "summary": "get user time on category",
-        "tags": [],
+        "tags": [
+          "time"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -152,7 +154,9 @@
       },
       "post": {
         "summary": "create user time on category",
-        "tags": [],
+        "tags": [
+          "time"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -179,7 +183,9 @@
       },
       "put": {
         "summary": "update user time on category",
-        "tags": [],
+        "tags": [
+          "time"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -220,7 +226,10 @@
           "name": {
             "type": "string"
           }
-        }
+        },
+        "x-tags": [
+          "user"
+        ]
       },
       "Time": {
         "title": "Time",
@@ -247,13 +256,19 @@
           "category": {
             "type": "string"
           }
-        }
+        },
+        "x-tags": [
+          "time"
+        ]
       }
     }
   },
   "tags": [
     {
       "name": "user"
+    },
+    {
+      "name": "time"
     }
   ]
 }
