@@ -27,21 +27,21 @@ public class TimeApiImpl implements TimeApi {
 
   @Override
   public ResponseEntity<TimeResource> getTimeByTimeIdForUsersById(Integer userId, Integer timeId) {
-    TimeResource result = timeService.findById(userId, timeId);
+    TimeResource result = timeService.findByIdForUserById(userId, timeId);
     return ResponseEntity.ok(result);
   }
 
   @Override
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<TimeResource> postTimeForUsersById(Integer userId, @Valid TimeResource timeResource) {
-    TimeResource result = timeService.create(userId, timeResource);
+    TimeResource result = timeService.createForUserById(userId, timeResource);
     return ResponseEntity.ok(result);
   }
 
   @Override
   public ResponseEntity<TimeResource> putTimeByIdForUserById(Integer userId, Integer timeId,
       @Valid TimeResource timeResource) {
-    TimeResource result = timeService.update(userId, timeId, timeResource);
+    TimeResource result = timeService.updateForUserById(userId, timeId, timeResource);
     return ResponseEntity.ok(result);
   }
 }

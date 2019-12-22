@@ -23,8 +23,7 @@ public class UserService {
   }
 
   public UserResource findById(Integer id) {
-    UserEntity user = userRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("存在しないユーザ"));
+    UserEntity user = findOrThrow(id);
     UserResource result = userFactory.generateUser(user);
     return result;
   }
@@ -36,8 +35,7 @@ public class UserService {
   }
 
   public UserResource update(Integer userId, UserResource userResource) {
-    UserEntity savedUser = userRepository.findById(userId)
-        .orElseThrow(() -> new RuntimeException("存在しないユーザ"));
+    UserEntity savedUser = findOrThrow(userId);
     savedUser.setName(userResource.getName());
     savedUser.setUpdatedAt(LocalDateTime.now());
     savedUser.setUpdatedBy("api"); // TODO want requester
@@ -46,12 +44,16 @@ public class UserService {
   }
 
   public void delete(Integer userId) {
-    UserEntity savedUser = userRepository.findById(userId)
-        .orElseThrow(() -> new RuntimeException("存在しないユーザ"));
+    UserEntity savedUser = findOrThrow(userId);
     savedUser.setUpdatedAt(LocalDateTime.now());
     savedUser.setUpdatedBy("api"); // TODO want requester
     savedUser.setDeletedAt(LocalDateTime.now());
     savedUser.setDeletedBy("api"); // TODO want requester
     userRepository.save(savedUser);
+  }
+
+  protected UserEntity findOrThrow(Integer userId) {
+    return userRepository.findById(userId)
+        .orElseThrow(() -> new RuntimeException("存在しないユーザです。"));
   }
 }

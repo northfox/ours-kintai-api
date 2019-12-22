@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TimeService {
+
   private final TimeFactory timeFactory;
   private final TimeRepository timeRepository;
 
@@ -23,15 +24,24 @@ public class TimeService {
     return timeFactory.generateTimes(times);
   }
 
-  public TimeResource findById(Integer userId, Integer timeId) {
+  public TimeResource findByIdForUserById(Integer userId, Integer timeId) {
+    TimeEntity found = findOrThrow(timeId);
+    if (found.getUserId().equals(userId)) {
+      throw new RuntimeException("記録時間が存在しないか、不正なアクセスです。");
+    }
+    return timeFactory.generateTime(found);
+  }
+
+  public TimeResource createForUserById(Integer userId, TimeResource timeResource) {
     return null;
   }
 
-  public TimeResource create(Integer userId, TimeResource timeResource) {
+  public TimeResource updateForUserById(Integer userId, Integer timeId, TimeResource timeResource) {
     return null;
   }
 
-  public TimeResource update(Integer userId, Integer timeId, TimeResource timeResource) {
-    return null;
+  private TimeEntity findOrThrow(Integer timeId) {
+    return timeRepository.findById(timeId)
+        .orElseThrow(() -> new RuntimeException("記録時間が存在しないか、不正なアクセスです。"));
   }
 }
